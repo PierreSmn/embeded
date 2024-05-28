@@ -31,7 +31,7 @@ body, html {
   width: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 .play-button-overlay {
@@ -44,7 +44,6 @@ body, html {
   align-items: center;
   width: 48px;
   height: 48px;
-  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
 }
 
