@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     width = '141px',
     height = '250px',
     playButtonColor = '#0000FF',
-    desiredOrder = [10, 5, 7, 8, 4]
+    desiredOrder = [10, 5, 7, 8, 11]
   } = config;
 
   document.documentElement.style.setProperty('--carousel-width', width);
