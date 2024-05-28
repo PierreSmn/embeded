@@ -1,0 +1,84 @@
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+#carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex: none;
+  height: var(--carousel-height, 250px);
+  width: var(--carousel-width, 141px);
+  scroll-snap-align: start;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.carousel-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+mux-player {
+  width: 100%;
+  height: auto;
+  --live-button: none;
+  --seek-backward-button: none;
+  --seek-forward-button: none;
+  --mute-button: none;
+  --captions-button: none;
+  --airplay-button: none;
+  --pip-button: none;
+  --fullscreen-button: none;
+  --cast-button: none;
+  --playback-rate-button: none;
+  --volume-range: none;
+  --rendition-selectmenu: none;
+}
+
+.fullscreen-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullscreen-video {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+}
+
+.vw-cmp__player--button-close {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.vw-cmp__player--button-icon svg {
+  width: 24px;
+  height: 24px;
+}
