@@ -14,6 +14,7 @@ body, html {
   scrollbar-width: none;
   max-width: 100%; /* Ensure it doesn't overflow the parent container */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  position: relative; /* Ensure it's positioned relative within its parent */
 }
 
 #carousel-container::-webkit-scrollbar {
