@@ -33,7 +33,13 @@ async function initializeVideoCarousel(config) {
       carouselItem.className = 'carousel-item';
       carouselItem.style.width = config.width;
       carouselItem.style.height = config.height;
-      carouselItem.innerHTML = `<img src="${item.thumbnail}" alt="Thumbnail">`;
+      carouselItem.innerHTML = `
+        <img src="${item.thumbnail}" alt="Thumbnail">
+        <div class="play-button-overlay">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 5v14l11-7-11-7z" fill="#FFFFFF"/>
+          </svg>
+        </div>`;
       carouselContainer.appendChild(carouselItem);
 
       carouselItem.addEventListener('click', function () {
