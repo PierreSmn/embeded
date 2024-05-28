@@ -10,6 +10,8 @@ body, html {
   scroll-snap-type: x mandatory;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  justify-content: center; /* Center the carousel items */
+  align-items: center; /* Center the carousel items vertically */
 }
 
 #carousel-container::-webkit-scrollbar {
@@ -18,8 +20,8 @@ body, html {
 
 .carousel-item {
   flex: none;
-  height: var(--carousel-height, 250px);
-  width: var(--carousel-width, 141px);
+  height: 250px; /* Fixed height */
+  width: 141px;  /* Fixed width */
   scroll-snap-align: start;
   margin-right: 10px;
   position: relative;
