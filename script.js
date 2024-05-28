@@ -1,20 +1,11 @@
-document.addEventListener('DOMContentLoaded', async function () {
-  const config = window.MyVideoCarouselConfig || {};
-  const {
-    width = '141px',
-    height = '250px',
-    playButtonColor = '#0000FF',
-    desiredOrder = [10, 5, 7, 8, 11]
-  } = config;
+async function initializeVideoCarousel(config) {
+  console.log("Initializing Video Carousel with config:", config);
 
-  document.documentElement.style.setProperty('--carousel-width', width);
-  document.documentElement.style.setProperty('--carousel-height', height);
-
-  const supabaseUrl = `https://pifcxlqwffdrqcwggoqb.supabase.co/rest/v1/hostedSubs?id=in.(${desiredOrder.join(',')})&select=*`;
+  const supabaseUrl = `https://pifcxlqwffdrqcwggoqb.supabase.co/rest/v1/hostedSubs?id=in.(${config.desiredOrder.join(',')})&select=*`;
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpZmN4bHF3ZmZkcnFjd2dnb3FiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzMyNjY2NTYsImV4cCI6MTk4ODg0MjY1Nn0.lha9G8j7lPLVGv0IU1sAT4SzrJb0I87LfhhvQV8Tc2Q';
 
   let data = [];
-
+  
   try {
     const response = await fetch(supabaseUrl, {
       method: 'GET',
@@ -30,8 +21,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     data = await response.json();
+    console.log('Fetched data:', data);
 
-    data.sort((a, b) => desiredOrder.indexOf(a.id) - desiredOrder.indexOf(b.id));
+    data.sort((a, b) => config.desiredOrder.indexOf(a.id) - config.desiredOrder.indexOf(b.id));
 
     const carouselContainer = document.getElementById('carousel-container');
     carouselContainer.innerHTML = '';
@@ -39,6 +31,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     data.forEach((item) => {
       const carouselItem = document.createElement('div');
       carouselItem.className = 'carousel-item';
+      carouselItem.style.width = config.width;
+      carouselItem.style.height = config.height;
       carouselItem.innerHTML = `<img src="${item.thumbnail}" alt="Thumbnail">`;
       carouselContainer.appendChild(carouselItem);
 
@@ -59,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     muxPlayer.setAttribute('playback-id', item.playback_id);
     muxPlayer.setAttribute('metadata-video-title', item.title);
     muxPlayer.setAttribute('metadata-viewer-user-id', 'user');
-    muxPlayer.setAttribute('accent-color', playButtonColor);
+    muxPlayer.setAttribute('accent-color', config.playButtonColor);
 
     overlay.style.display = 'flex';
 
@@ -79,4 +73,4 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   const overlay = document.getElementById('fullscreen-overlay');
   overlay.style.display = 'none';
-});
+}
