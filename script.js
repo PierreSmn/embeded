@@ -35,7 +35,7 @@ async function initializeVideoCarousel(config) {
       carouselItem.style.height = config.height;
       carouselItem.innerHTML = `
         <img src="${item.thumbnail}" alt="Thumbnail">
-        <div class="play-button-overlay">
+        <div class="play-button-overlay" style="background-color: ${config.playButtonColor}">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M8 5v14l11-7-11-7z" fill="#FFFFFF"/>
           </svg>
@@ -59,7 +59,6 @@ async function initializeVideoCarousel(config) {
     muxPlayer.setAttribute('playback-id', item.playback_id);
     muxPlayer.setAttribute('metadata-video-title', item.title);
     muxPlayer.setAttribute('metadata-viewer-user-id', 'user');
-    muxPlayer.setAttribute('accent-color', config.playButtonColor);
 
     overlay.style.display = 'flex';
 
