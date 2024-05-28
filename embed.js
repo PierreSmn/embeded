@@ -18,11 +18,11 @@
 
   var link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = 'https://your-vercel-domain.vercel.app/styles.css';
+  link.href = 'https://embeded-pi.vercel.app/styles.css';
   document.head.appendChild(link);
 
   var customScript = document.createElement('script');
-  customScript.src = 'https://your-vercel-domain.vercel.app/script.js';
+  customScript.src = 'https://embeded-pi.vercel.app/script.js';
   customScript.async = true;
   customScript.onload = function() {
     if (typeof initializeVideoCarousel === 'function') {
