@@ -3,36 +3,40 @@
 
   // Load configuration from global variable
   window.MyVideoCarouselConfig = window.MyVideoCarouselConfig || {
-    width: '141px',
-    height: '250px',
     playButtonColor: '#0000FF',
     desiredOrder: [10, 5, 7, 8, 4]
   };
 
-  // Log the configuration
-  console.log('Configuration:', window.MyVideoCarouselConfig);
+  // Function to load external scripts
+  function loadScript(src, callback) {
+    var script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.onload = callback;
+    document.head.appendChild(script);
+  }
 
   // Load Mux Player script
-  var muxPlayerScript = document.createElement('script');
-  muxPlayerScript.src = 'https://cdn.jsdelivr.net/npm/@mux/mux-player';
-  muxPlayerScript.async = true;
-  document.head.appendChild(muxPlayerScript);
+  loadScript('https://cdn.jsdelivr.net/npm/@mux/mux-player', function() {
+    console.log('Mux Player script loaded');
+    checkIfAllLoaded();
+  });
 
   // Load Supabase script
-  var supabaseScript = document.createElement('script');
-  supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js';
-  supabaseScript.async = true;
-  document.head.appendChild(supabaseScript);
+  loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js', function() {
+    console.log('Supabase script loaded');
+    checkIfAllLoaded();
+  });
 
   // Load custom styles
   var link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = 'https://embeded-pi.vercel.app/styles.css'; // Update with your Vercel URL
+  link.href = 'https://embeded-pi.vercel.app/styles.css';
   document.head.appendChild(link);
 
   // Load custom script
   var customScript = document.createElement('script');
-  customScript.src = 'https://embeded-pi.vercel.app/script.js'; // Update with your Vercel URL
+  customScript.src = 'https://embeded-pi.vercel.app/script.js';
   customScript.async = true;
   customScript.onload = function() {
     console.log('Custom script loaded');
@@ -45,6 +49,8 @@
   // Create a container div for the carousel
   var container = document.createElement('div');
   container.id = 'carousel-container';
+  container.style.position = 'relative'; // Ensure it's positioned relative within its parent
+  container.style.maxWidth = '100%'; // Ensure it doesn't overflow the parent container
   document.body.appendChild(container);
 
   // Create a container div for the fullscreen overlay
@@ -68,4 +74,16 @@
     </div>
   `;
   document.body.appendChild(overlay);
+
+  // Ensure overlay is hidden on page load
+  overlay.style.display = 'none';
+
+  // Check if all scripts are loaded
+  var scriptsLoaded = 0;
+  function checkIfAllLoaded() {
+    scriptsLoaded++;
+    if (scriptsLoaded === 2) {
+      initializeVideoCarousel(window.MyVideoCarouselConfig);
+    }
+  }
 })();
