@@ -34,7 +34,7 @@ async function initializeVideoCarousel(config) {
 
     function updateCarousel() {
       carouselContainer.innerHTML = '';
-      for (let i = startIndex; i < Math.min(startIndex + 3, data.length); i++) {
+      for (let i = startIndex; i < Math.min(startIndex + 5, data.length); i++) {
         const item = data[i];
         const carouselItem = document.createElement('div');
         carouselItem.className = 'carousel-item';
@@ -64,7 +64,7 @@ async function initializeVideoCarousel(config) {
         carouselContainer.appendChild(leftButton);
       }
 
-      if (startIndex + 3 < data.length) {
+      if (startIndex + 5 < data.length) {
         const rightButton = document.createElement('div');
         rightButton.className = 'carousel-nav-button carousel-nav-button-right';
         rightButton.innerHTML = `
@@ -84,7 +84,7 @@ async function initializeVideoCarousel(config) {
     }
 
     function navigateRight() {
-      if (startIndex + 3 < data.length) {
+      if (startIndex + 5 < data.length) {
         startIndex++;
         updateCarousel();
       }
