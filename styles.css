@@ -122,14 +122,14 @@ mux-player {
   border-radius: 50%;
 }
 
-.vw-cmp__player--button-next {
-  bottom: 50%;
-  transform: translateY(24px);
-}
-
 .vw-cmp__player--button-prev {
   top: 50%;
-  transform: translateY(-24px);
+  transform: translateY(-58px); /* Adjust to position above the center */
+}
+
+.vw-cmp__player--button-next {
+  top: 50%;
+  transform: translateY(58px); /* Adjust to position below the center */
 }
 
 .vw-cmp__player--button-next svg,
