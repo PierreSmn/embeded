@@ -1,13 +1,11 @@
 (function() {
   console.log('Embed script loaded');
 
-  // Load configuration from global variable
   window.MyVideoCarouselConfig = window.MyVideoCarouselConfig || {
     playButtonColor: '#0000FF',
     desiredOrder: [10, 5, 7, 8, 4]
   };
 
-  // Function to load external scripts
   function loadScript(src, callback) {
     var script = document.createElement('script');
     script.src = src;
@@ -16,25 +14,21 @@
     document.head.appendChild(script);
   }
 
-  // Load Mux Player script
   loadScript('https://cdn.jsdelivr.net/npm/@mux/mux-player', function() {
     console.log('Mux Player script loaded');
     checkIfAllLoaded();
   });
 
-  // Load Supabase script
   loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js', function() {
     console.log('Supabase script loaded');
     checkIfAllLoaded();
   });
 
-  // Load custom styles
   var link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = 'https://embeded-pi.vercel.app/styles.css';
   document.head.appendChild(link);
 
-  // Load custom script
   var customScript = document.createElement('script');
   customScript.src = 'https://embeded-pi.vercel.app/script.js';
   customScript.async = true;
@@ -46,14 +40,12 @@
   };
   document.head.appendChild(customScript);
 
-  // Create a container div for the carousel
   var container = document.createElement('div');
   container.id = 'carousel-container';
-  container.style.position = 'relative'; // Ensure it's positioned relative within its parent
-  container.style.maxWidth = '100%'; // Ensure it doesn't overflow the parent container
+  container.style.position = 'relative';
+  container.style.maxWidth = '100%';
   document.body.appendChild(container);
 
-  // Create a container div for the fullscreen overlay
   var overlay = document.createElement('div');
   overlay.className = 'fullscreen-overlay';
   overlay.id = 'fullscreen-overlay';
@@ -72,13 +64,18 @@
         </svg>
       </span>
     </div>
+    <div class="vw-cmp__player--button-next vw-cmp__player--button" tabindex="0" aria-label="Next video" role="button">
+      <span class="vw-cmp__player--button-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 5v14l11-7-11-7z" fill="white"></path>
+        </svg>
+      </span>
+    </div>
   `;
   document.body.appendChild(overlay);
 
-  // Ensure overlay is hidden on page load
   overlay.style.display = 'none';
 
-  // Check if all scripts are loaded
   var scriptsLoaded = 0;
   function checkIfAllLoaded() {
     scriptsLoaded++;
