@@ -128,6 +128,7 @@ mux-player {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   margin-bottom: 8px; /* Space between the buttons */
+  border: 2px solid grey; /* Grey border */
 }
 
 .nav-button:last-child {
