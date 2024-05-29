@@ -6,6 +6,7 @@ async function initializeVideoCarousel(config) {
 
   let data = [];
   let currentIndex = 0;
+  let startIndex = 0;
   
   try {
     const response = await fetch(supabaseUrl, {
@@ -29,23 +30,65 @@ async function initializeVideoCarousel(config) {
     const carouselContainer = document.getElementById('carousel-container');
     carouselContainer.innerHTML = '';
 
-    data.forEach((item, index) => {
-      const carouselItem = document.createElement('div');
-      carouselItem.className = 'carousel-item';
-      carouselItem.innerHTML = `
-        <img src="${item.thumbnail}" alt="Thumbnail">
-        <div class="play-button-overlay" style="background-color: rgba(0, 0, 0, 0.5)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="${config.playButtonColor}" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 5v14l11-7-11-7z"/>
-          </svg>
-        </div>`;
-      carouselContainer.appendChild(carouselItem);
+    updateCarousel();
 
-      carouselItem.addEventListener('click', function () {
-        currentIndex = index;
-        openOverlay(item);
-      });
-    });
+    function updateCarousel() {
+      carouselContainer.innerHTML = '';
+      for (let i = startIndex; i < Math.min(startIndex + 3, data.length); i++) {
+        const item = data[i];
+        const carouselItem = document.createElement('div');
+        carouselItem.className = 'carousel-item';
+        carouselItem.innerHTML = `
+          <img src="${item.thumbnail}" alt="Thumbnail">
+          <div class="play-button-overlay" style="background-color: rgba(0, 0, 0, 0.5)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="${config.playButtonColor}" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M8 5v14l11-7-11-7z"/>
+            </svg>
+          </div>`;
+        carouselContainer.appendChild(carouselItem);
+
+        carouselItem.addEventListener('click', function () {
+          currentIndex = i;
+          openOverlay(item);
+        });
+      }
+
+      if (startIndex > 0) {
+        const leftButton = document.createElement('div');
+        leftButton.className = 'carousel-nav-button carousel-nav-button-left';
+        leftButton.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2"/>
+          </svg>`;
+        leftButton.addEventListener('click', navigateLeft);
+        carouselContainer.appendChild(leftButton);
+      }
+
+      if (startIndex + 3 < data.length) {
+        const rightButton = document.createElement('div');
+        rightButton.className = 'carousel-nav-button carousel-nav-button-right';
+        rightButton.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2"/>
+          </svg>`;
+        rightButton.addEventListener('click', navigateRight);
+        carouselContainer.appendChild(rightButton);
+      }
+    }
+
+    function navigateLeft() {
+      if (startIndex > 0) {
+        startIndex--;
+        updateCarousel();
+      }
+    }
+
+    function navigateRight() {
+      if (startIndex + 3 < data.length) {
+        startIndex++;
+        updateCarousel();
+      }
+    }
 
   } catch (error) {
     console.error('Error fetching data:', error);
