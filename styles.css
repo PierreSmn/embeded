@@ -8,17 +8,23 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Hide overflow to show only 3 items */
-  max-width: 530px; /* Increase width to accommodate buttons */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  scroll-snap-type: x mandatory; /* Apply scroll snapping */
+  max-width: 800px; /* Increase width to accommodate 5 items */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
   position: relative;
   margin: 0 auto; /* Center the container */
+  padding-bottom: 20px; /* Add space for the navigation buttons */
+}
+
+#carousel-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for WebKit-based browsers */
 }
 
 .carousel-item {
   flex: none;
   height: 250px; /* Fixed height */
-  width: 141px;  /* Fixed width */
+  width: 141px; /* Fixed width */
   scroll-snap-align: start;
   margin-right: 10px;
   position: relative;
@@ -152,11 +158,11 @@ mux-player {
 }
 
 .carousel-nav-button-left {
-  left: 0px; /* Position 100px to the left of the current position */
+  left: -40px; /* Adjust to position 40px to the left */
 }
 
 .carousel-nav-button-right {
-  right: 0px; /* Position 100px to the right of the current position */
+  right: -40px; /* Adjust to position 40px to the right */
 }
 
 .carousel-nav-button svg {
