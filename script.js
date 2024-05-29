@@ -5,6 +5,7 @@ async function initializeVideoCarousel(config) {
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpZmN4bHF3ZmZkcnFjd2dnb3FiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzMyNjY2NTYsImV4cCI6MTk4ODg0MjY1Nn0.lha9G8j7lPLVGv0IU1sAT4SzrJb0I87LfhhvQV8Tc2Q';
 
   let data = [];
+  let currentIndex = 0;
   
   try {
     const response = await fetch(supabaseUrl, {
@@ -28,11 +29,9 @@ async function initializeVideoCarousel(config) {
     const carouselContainer = document.getElementById('carousel-container');
     carouselContainer.innerHTML = '';
 
-    data.forEach((item) => {
+    data.forEach((item, index) => {
       const carouselItem = document.createElement('div');
       carouselItem.className = 'carousel-item';
-      carouselItem.style.width = config.width;
-      carouselItem.style.height = config.height;
       carouselItem.innerHTML = `
         <img src="${item.thumbnail}" alt="Thumbnail">
         <div class="play-button-overlay" style="background-color: rgba(0, 0, 0, 0.5)">
@@ -43,6 +42,7 @@ async function initializeVideoCarousel(config) {
       carouselContainer.appendChild(carouselItem);
 
       carouselItem.addEventListener('click', function () {
+        currentIndex = index;
         openOverlay(item);
       });
     });
@@ -67,6 +67,11 @@ async function initializeVideoCarousel(config) {
     });
   }
 
+  function playNextVideo() {
+    currentIndex = (currentIndex + 1) % data.length;
+    openOverlay(data[currentIndex]);
+  }
+
   const closeButton = document.querySelector('.vw-cmp__player--button-close');
   closeButton.addEventListener('click', function () {
     const overlay = document.getElementById('fullscreen-overlay');
@@ -75,6 +80,9 @@ async function initializeVideoCarousel(config) {
     const muxPlayer = overlay.querySelector('mux-player');
     muxPlayer.pause();
   });
+
+  const nextButton = document.querySelector('.vw-cmp__player--button-next');
+  nextButton.addEventListener('click', playNextVideo);
 
   const overlay = document.getElementById('fullscreen-overlay');
   overlay.style.display = 'none';
