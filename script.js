@@ -65,6 +65,9 @@ async function initializeVideoCarousel(config) {
     muxPlayer.addEventListener('loadedmetadata', function () {
       muxPlayer.play();
     });
+
+    // Add event listener for video end to play next video
+    muxPlayer.addEventListener('ended', playNextVideo);
   }
 
   function playNextVideo() {
