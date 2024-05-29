@@ -94,7 +94,7 @@ mux-player {
   max-width: 100%;
 }
 
-.vw-cmp__player--button-close {
+.close-button {
   position: absolute;
   top: 16px;
   left: 16px;
@@ -102,15 +102,22 @@ mux-player {
   z-index: 10;
 }
 
-.vw-cmp__player--button-icon svg {
+.close-button-icon svg {
   width: 24px;
   height: 24px;
 }
 
-.vw-cmp__player--button-next,
-.vw-cmp__player--button-prev {
+.navigation-buttons {
   position: absolute;
   right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-button {
   width: 48px;
   height: 48px;
   cursor: pointer;
@@ -118,23 +125,17 @@ mux-player {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Same style as the close button */
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
+  margin-bottom: 8px; /* Space between the buttons */
 }
 
-.vw-cmp__player--button-prev {
-  top: 50%;
-  transform: translateY(-58px); /* Adjust to position above the center */
+.nav-button:last-child {
+  margin-bottom: 0;
 }
 
-.vw-cmp__player--button-next {
-  top: 50%;
-  transform: translateY(58px); /* Adjust to position below the center */
-}
-
-.vw-cmp__player--button-next svg,
-.vw-cmp__player--button-prev svg {
+.nav-button-icon svg {
   fill: white;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 13px;
 }
