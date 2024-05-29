@@ -40,13 +40,9 @@
   };
   document.head.appendChild(customScript);
 
-  var containerWrapper = document.createElement('div');
-  containerWrapper.id = 'carousel-container-wrapper';
-  document.body.appendChild(containerWrapper);
-
   var container = document.createElement('div');
   container.id = 'carousel-container';
-  containerWrapper.appendChild(container);
+  document.body.appendChild(container);
 
   var overlay = document.createElement('div');
   overlay.className = 'fullscreen-overlay';
