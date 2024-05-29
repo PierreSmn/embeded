@@ -72,6 +72,11 @@ async function initializeVideoCarousel(config) {
     openOverlay(data[currentIndex]);
   }
 
+  function playPreviousVideo() {
+    currentIndex = (currentIndex - 1 + data.length) % data.length;
+    openOverlay(data[currentIndex]);
+  }
+
   const closeButton = document.querySelector('.vw-cmp__player--button-close');
   closeButton.addEventListener('click', function () {
     const overlay = document.getElementById('fullscreen-overlay');
@@ -83,6 +88,9 @@ async function initializeVideoCarousel(config) {
 
   const nextButton = document.querySelector('.vw-cmp__player--button-next');
   nextButton.addEventListener('click', playNextVideo);
+
+  const prevButton = document.querySelector('.vw-cmp__player--button-prev');
+  prevButton.addEventListener('click', playPreviousVideo);
 
   const overlay = document.getElementById('fullscreen-overlay');
   overlay.style.display = 'none';
