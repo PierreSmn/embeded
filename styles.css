@@ -153,11 +153,11 @@ mux-player {
 }
 
 .carousel-nav-button-left {
-  left: 0; /* Position to the left inside the container */
+  left: -100px; /* Position 100px to the left of the current position */
 }
 
 .carousel-nav-button-right {
-  right: 0; /* Position to the right inside the container */
+  right: -100px; /* Position 100px to the right of the current position */
 }
 
 .carousel-nav-button svg {
