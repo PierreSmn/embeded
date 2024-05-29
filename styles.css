@@ -107,16 +107,34 @@ mux-player {
   height: 24px;
 }
 
-.vw-cmp__player--button-next {
+.vw-cmp__player--button-next,
+.vw-cmp__player--button-prev {
   position: absolute;
-  bottom: 16px;
   right: 16px;
+  width: 48px;
+  height: 48px;
   cursor: pointer;
   z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Same style as the close button */
+  border-radius: 50%;
 }
 
-.vw-cmp__player--button-next svg {
+.vw-cmp__player--button-next {
+  bottom: 50%;
+  transform: translateY(24px);
+}
+
+.vw-cmp__player--button-prev {
+  top: 50%;
+  transform: translateY(-24px);
+}
+
+.vw-cmp__player--button-next svg,
+.vw-cmp__player--button-prev svg {
+  fill: white;
   width: 24px;
   height: 24px;
-  fill: white;
 }
