@@ -8,11 +8,9 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Hide overflow to show only 3 items */
   max-width: 650px; /* Increase width to accommodate buttons */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
   position: relative;
-  padding: 0 100px; /* Add padding to the left and right for buttons */
   margin: 0 auto; /* Center the container */
 }
 
