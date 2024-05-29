@@ -64,6 +64,13 @@
         </svg>
       </span>
     </div>
+    <div class="vw-cmp__player--button-prev vw-cmp__player--button" tabindex="0" aria-label="Previous video" role="button">
+      <span class="vw-cmp__player--button-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 19l-8-7 8-7v14z" fill="white"></path>
+        </svg>
+      </span>
+    </div>
     <div class="vw-cmp__player--button-next vw-cmp__player--button" tabindex="0" aria-label="Next video" role="button">
       <span class="vw-cmp__player--button-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
