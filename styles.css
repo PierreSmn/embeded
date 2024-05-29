@@ -8,17 +8,10 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  max-width: 100%; /* Ensure it doesn't overflow the parent container */
+  overflow: hidden; /* Hide overflow to show only 3 items */
+  max-width: 450px; /* Limit to the width of 3 items */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  position: relative; /* Ensure it's positioned relative within its parent */
-}
-
-#carousel-container::-webkit-scrollbar {
-  display: none;
+  position: relative;
 }
 
 .carousel-item {
@@ -139,4 +132,33 @@ mux-player {
   fill: white;
   width: 22px;
   height: 13px;
+}
+
+.carousel-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-nav-button-left {
+  left: -24px; /* Adjust to position outside the carousel */
+}
+
+.carousel-nav-button-right {
+  right: -24px; /* Adjust to position outside the carousel */
+}
+
+.carousel-nav-button svg {
+  fill: white;
+  width: 24px;
+  height: 24px;
 }
