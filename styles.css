@@ -106,3 +106,17 @@ mux-player {
   width: 24px;
   height: 24px;
 }
+
+.vw-cmp__player--button-next {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.vw-cmp__player--button-next svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
