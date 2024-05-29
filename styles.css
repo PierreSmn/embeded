@@ -12,7 +12,6 @@ body, html {
   max-width: 530px; /* Increase width to accommodate buttons */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
   position: relative;
-  padding: 0 100px; /* Add padding to the left and right for buttons */
   margin: 0 auto; /* Center the container */
 }
 
@@ -31,7 +30,7 @@ body, html {
   width: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 16px;
+  border-radius: 4px;
 }
 
 .play-button-overlay {
