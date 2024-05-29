@@ -140,8 +140,8 @@ mux-player {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 56px; /* Increase size */
-  height: 56px; /* Increase size */
+  width: 32px; /* Increase size */
+  height: 32px; /* Increase size */
   display: flex;
   justify-content: center;
   align-items: center;
