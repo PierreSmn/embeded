@@ -57,26 +57,28 @@
       metadata-viewer-user-id="user"
       accent-color="${window.MyVideoCarouselConfig.playButtonColor}"
     ></mux-player>
-    <div class="vw-cmp__player--button-close vw-cmp__player--button" tabindex="0" aria-label="Close dialog" role="button">
-      <span class="vw-cmp__player--button-icon">
+    <div class="close-button" tabindex="0" aria-label="Close dialog" role="button">
+      <span class="close-button-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0002 10.586L4.70718 3.29297L3.29297 4.70718L10.586 12.0002L3.29297 19.2933L4.70718 20.7075L12.0002 13.4145L19.2933 20.7075L20.7075 19.2933L13.4145 12.0002L20.7075 4.70723L19.2933 3.29302L12.0002 10.586Z" fill="white"></path>
         </svg>
       </span>
     </div>
-    <div class="vw-cmp__player--button-prev vw-cmp__player--button" tabindex="0" aria-label="Previous video" role="button">
-      <span class="vw-cmp__player--button-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 19l-8-7 8-7v14z" fill="white"></path>
-        </svg>
-      </span>
-    </div>
-    <div class="vw-cmp__player--button-next vw-cmp__player--button" tabindex="0" aria-label="Next video" role="button">
-      <span class="vw-cmp__player--button-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 5v14l11-7-11-7z" fill="white"></path>
-        </svg>
-      </span>
+    <div class="navigation-buttons">
+      <div class="nav-button nav-button-prev" tabindex="0" aria-label="Previous video" role="button">
+        <span class="nav-button-icon">
+          <svg width="22" height="13" viewBox="0 0 22 13" fill="none">
+            <path d="M0.999907 11.9999L10.9998 2L20.9999 12" stroke="white" stroke-width="2.2"></path>
+          </svg>
+        </span>
+      </div>
+      <div class="nav-button nav-button-next" tabindex="0" aria-label="Next video" role="button">
+        <span class="nav-button-icon">
+          <svg width="22" height="13" viewBox="0 0 22 13" fill="none">
+            <path d="M0.999907 1.00013L10.9998 11L20.9999 1" stroke="white" stroke-width="2.2"></path>
+          </svg>
+        </span>
+      </div>
     </div>
   `;
   document.body.appendChild(overlay);
