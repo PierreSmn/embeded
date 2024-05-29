@@ -61,7 +61,7 @@ async function initializeVideoCarousel(config) {
             <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2"/>
           </svg>`;
         leftButton.addEventListener('click', navigateLeft);
-        carouselContainer.appendChild(leftButton);
+        document.getElementById('carousel-container-wrapper').appendChild(leftButton);
       }
 
       if (startIndex + 3 < data.length) {
@@ -72,7 +72,7 @@ async function initializeVideoCarousel(config) {
             <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2"/>
           </svg>`;
         rightButton.addEventListener('click', navigateRight);
-        carouselContainer.appendChild(rightButton);
+        document.getElementById('carousel-container-wrapper').appendChild(rightButton);
       }
     }
 
