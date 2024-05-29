@@ -150,11 +150,11 @@ mux-player {
 }
 
 .carousel-nav-button-left {
-  left: -24px; /* Adjust to position outside the carousel */
+  left: -60px; /* Position to the left outside the carousel */
 }
 
 .carousel-nav-button-right {
-  right: -24px; /* Adjust to position outside the carousel */
+  right: -60px; /* Position to the right outside the carousel */
 }
 
 .carousel-nav-button svg {
