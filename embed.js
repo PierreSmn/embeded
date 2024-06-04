@@ -2,15 +2,16 @@
   console.log('Embed script loaded');
 
   window.MyVideoCarouselConfig = window.MyVideoCarouselConfig || {
-    playButtonColor: '#0000FF'
+    playButtonColor: '#0000FF',
+    integrationId: null // Default value, should be set by the customer
   };
 
   const supabaseUrl = 'https://pifcxlqwffdrqcwggoqb.supabase.co/rest/v1/integrations';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpZmN4bHF3ZmZkcnFjd2dnb3FiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzMyNjY2NTYsImV4cCI6MTk4ODg0MjY1Nn0.lha9G8j7lPLVGv0IU1sAT4SzrJb0I87LfhhvQV8Tc2Q';
 
-  async function fetchVideoIds() {
+  async function fetchVideoIds(integrationId) {
     try {
-      const response = await fetch(supabaseUrl, {
+      const response = await fetch(`${supabaseUrl}?id=eq.${integrationId}`, {
         method: 'GET',
         headers: {
           'apikey': supabaseKey,
@@ -24,10 +25,15 @@
       }
 
       const data = await response.json();
-      const videoIds = data.slice(0, 5).map(item => item.vid1); // Adjust to get vid1 to vid5
+      if (data.length > 0) {
+        const integrationData = data[0];
+        const videoIds = [integrationData.vid1, integrationData.vid2, integrationData.vid3, integrationData.vid4, integrationData.vid5].filter(id => id);
 
-      window.MyVideoCarouselConfig.desiredOrder = videoIds;
-      initializeCarousel();
+        window.MyVideoCarouselConfig.desiredOrder = videoIds;
+        initializeCarousel();
+      } else {
+        console.error('No data found for the specified integration ID');
+      }
     } catch (error) {
       console.error('Error fetching video IDs:', error);
     }
@@ -120,5 +126,10 @@
     }
   }
 
-  fetchVideoIds();
+  const integrationId = window.MyVideoCarouselConfig.integrationId;
+  if (integrationId) {
+    fetchVideoIds(integrationId);
+  } else {
+    console.error('Integration ID is not specified in the configuration');
+  }
 })();
