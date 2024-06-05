@@ -3,13 +3,14 @@
 
   window.MyVideoCarouselConfig = window.MyVideoCarouselConfig || {
     playButtonColor: '#0000FF',
-    integrationId: null // Default value, should be set by the customer
+    integrationId: null, // Default value, should be set by the customer
+    numVideos: 5 // Default value
   };
 
   const supabaseUrl = 'https://pifcxlqwffdrqcwggoqb.supabase.co/rest/v1/integrations';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpZmN4bHF3ZmZkcnFjd2dnb3FiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzMyNjY2NTYsImV4cCI6MTk4ODg0MjY1Nn0.lha9G8j7lPLVGv0IU1sAT4SzrJb0I87LfhhvQV8Tc2Q';
 
-  async function fetchVideoIds(integrationId) {
+  async function fetchVideoIds(integrationId, numVideos) {
     try {
       const response = await fetch(`${supabaseUrl}?id=eq.${integrationId}`, {
         method: 'GET',
@@ -27,7 +28,12 @@
       const data = await response.json();
       if (data.length > 0) {
         const integrationData = data[0];
-        const videoIds = [integrationData.vid1, integrationData.vid2, integrationData.vid3, integrationData.vid4, integrationData.vid5].filter(id => id);
+        const videoIds = [];
+        for (let i = 1; i <= numVideos; i++) {
+          if (integrationData[`vid${i}`]) {
+            videoIds.push(integrationData[`vid${i}`]);
+          }
+        }
 
         window.MyVideoCarouselConfig.desiredOrder = videoIds;
         initializeCarousel();
@@ -127,8 +133,9 @@
   }
 
   const integrationId = window.MyVideoCarouselConfig.integrationId;
+  const numVideos = window.MyVideoCarouselConfig.numVideos;
   if (integrationId) {
-    fetchVideoIds(integrationId);
+    fetchVideoIds(integrationId, numVideos);
   } else {
     console.error('Integration ID is not specified in the configuration');
   }
