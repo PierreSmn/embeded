@@ -170,3 +170,11 @@ mux-player {
   width: 32px; /* Increase icon size */
   height: 32px; /* Increase icon size */
 }
+
+/* Media query for mobile devices */
+@media (max-width: 600px) {
+  #carousel-container {
+    justify-content: flex-start; /* Align to start on mobile */
+    padding-bottom: 10px; /* Adjust padding */
+  }
+}
