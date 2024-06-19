@@ -5,6 +5,7 @@ async function initializeVideoCarousel(config) {
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpZmN4bHF3ZmZkcnFjd2dnb3FiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzMyNjY2NTYsImV4cCI6MTk4ODg0MjY1Nn0.lha9G8j7lPLVGv0IU1sAT4SzrJb0I87LfhhvQV8Tc2Q';
 
   let data = [];
+  let videoMetadata = {}; // Store metadata for each video
   let currentIndex = 0;
   let startIndex = 0;
   
@@ -26,6 +27,25 @@ async function initializeVideoCarousel(config) {
     console.log('Fetched data:', data);
 
     data.sort((a, b) => config.desiredOrder.indexOf(a.id) - config.desiredOrder.indexOf(b.id));
+
+    // Preload metadata for the first 5 videos
+    for (let i = 0; i < Math.min(5, data.length); i++) {
+      const video = data[i];
+      const muxPlayer = document.createElement('mux-player');
+      muxPlayer.setAttribute('playback-id', video.playback_id);
+      muxPlayer.setAttribute('preload', 'metadata');
+      muxPlayer.style.display = 'none';
+      document.body.appendChild(muxPlayer);
+
+      muxPlayer.addEventListener('loadedmetadata', function() {
+        videoMetadata[video.id] = {
+          playbackId: video.playback_id,
+          title: video.title,
+          duration: muxPlayer.duration
+        };
+        document.body.removeChild(muxPlayer);
+      });
+    }
 
     const carouselContainer = document.getElementById('carousel-container');
     carouselContainer.innerHTML = '';
@@ -99,8 +119,14 @@ async function initializeVideoCarousel(config) {
     const overlay = document.getElementById('fullscreen-overlay');
     const muxPlayer = overlay.querySelector('mux-player');
 
-    muxPlayer.setAttribute('playback-id', item.playback_id);
-    muxPlayer.setAttribute('metadata-video-title', item.title);
+    // Use preloaded metadata if available
+    if (videoMetadata[item.id]) {
+      muxPlayer.setAttribute('playback-id', videoMetadata[item.id].playbackId);
+      muxPlayer.setAttribute('metadata-video-title', videoMetadata[item.id].title);
+    } else {
+      muxPlayer.setAttribute('playback-id', item.playback_id);
+      muxPlayer.setAttribute('metadata-video-title', item.title);
+    }
     muxPlayer.setAttribute('metadata-viewer-user-id', 'user');
 
     overlay.style.display = 'flex';
