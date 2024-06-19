@@ -30,19 +30,7 @@ async function initializeVideoCarousel(config) {
     const carouselContainer = document.getElementById('carousel-container');
     carouselContainer.innerHTML = '';
 
-    preloadVideos(data.slice(0, 5)); // Preload the first 5 videos
-
     updateCarousel();
-
-    function preloadVideos(videos) {
-      videos.forEach((item, index) => {
-        const muxPlayer = document.createElement('mux-player');
-        muxPlayer.setAttribute('playback-id', item.playback_id);
-        muxPlayer.setAttribute('preload', 'auto');
-        muxPlayer.style.display = 'none';
-        document.body.appendChild(muxPlayer);
-      });
-    }
 
     function updateCarousel() {
       carouselContainer.innerHTML = '';
