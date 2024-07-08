@@ -47,10 +47,12 @@ async function initializeVideoCarousel(config) {
           </div>`;
         carouselContainer.appendChild(carouselItem);
 
-        carouselItem.addEventListener('click', function () {
-          currentIndex = i;
-          openOverlay(item);
-        });
+        if (!config.disableClick) {
+          carouselItem.addEventListener('click', function () {
+            currentIndex = i;
+            openOverlay(item);
+          });
+        }
       }
 
       if (startIndex > 0) {
