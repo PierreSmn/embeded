@@ -7,7 +7,7 @@ async function initializeVideoCarousel(config) {
   let data = [];
   let currentIndex = 0;
   let startIndex = 0;
-  
+
   try {
     const response = await fetch(supabaseUrl, {
       method: 'GET',
@@ -40,11 +40,12 @@ async function initializeVideoCarousel(config) {
         carouselItem.className = 'carousel-item';
         carouselItem.innerHTML = `
           <img src="${item.thumbnail}" alt="Thumbnail">
+          ${!config.disableClick ? `
           <div class="play-button-overlay" style="background-color: rgba(0, 0, 0, 0.5)">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="${config.playButtonColor}" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M8 5v14l11-7-11-7z"/>
             </svg>
-          </div>`;
+          </div>` : ''}`;
         carouselContainer.appendChild(carouselItem);
 
         if (!config.disableClick) {
