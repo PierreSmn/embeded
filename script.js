@@ -126,14 +126,16 @@ async function initializeVideoCarousel(config) {
     openOverlay(data[currentIndex]);
   }
 
-  const closeButton = document.querySelector('.close-button');
-  closeButton.addEventListener('click', function () {
+  function closeOverlay() {
     const overlay = document.getElementById('fullscreen-overlay');
     overlay.style.display = 'none';
 
     const muxPlayer = overlay.querySelector('mux-player');
     muxPlayer.pause();
-  });
+  }
+
+  const closeButton = document.querySelector('.close-button');
+  closeButton.addEventListener('click', closeOverlay);
 
   const nextButton = document.querySelector('.nav-button-next');
   nextButton.addEventListener('click', playNextVideo);
@@ -142,5 +144,11 @@ async function initializeVideoCarousel(config) {
   prevButton.addEventListener('click', playPreviousVideo);
 
   const overlay = document.getElementById('fullscreen-overlay');
+  overlay.addEventListener('click', function(event) {
+    if (event.target === overlay) {
+      closeOverlay();
+    }
+  });
+
   overlay.style.display = 'none';
 }
