@@ -103,7 +103,34 @@ async function initializeVideoCarousel(config) {
     const muxPlayer = overlay.querySelector('mux-player');
 
     muxPlayer.setAttribute('playback-id', item.playback_id);
-    muxPlayer.setAttribute('metadata-video-title', item.title);
+  function setMetadataWithRetry(muxPlayer, title, retries) {
+  let attempt = 0;
+
+  function trySetTitle() {
+    if (attempt >= retries) {
+      console.error('Failed to set metadata-video-title after multiple attempts');
+      return;
+    }
+
+    try {
+      // Set the metadata title
+      muxPlayer.setAttribute('metadata-video-title', title || 'Untitled Video');
+      // Check if the title was set correctly
+      if (muxPlayer.getAttribute('metadata-video-title') === title) {
+        console.log('Successfully set metadata-video-title:', title);
+      } else {
+        throw new Error('Title not set correctly');
+      }
+    } catch (error) {
+      attempt++;
+      console.warn(`Attempt ${attempt} failed: ${error.message}`);
+      setTimeout(trySetTitle, 1000); // Retry after 1 second
+    }
+  }
+
+  trySetTitle();
+}
+
     muxPlayer.setAttribute('metadata-viewer-user-id', 'user');
 
     overlay.style.display = 'flex';
