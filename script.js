@@ -98,11 +98,14 @@ async function initializeVideoCarousel(config) {
     document.getElementById('carousel-container').innerHTML = 'Failed to load data.';
   }
 
+
   function openOverlay(item) {
     const overlay = document.getElementById('fullscreen-overlay');
     const muxPlayer = overlay.querySelector('mux-player');
 
     muxPlayer.setAttribute('playback-id', item.playback_id);
+
+    setMetadataWithRetry(muxPlayer, item.title, 5); // Retry up to 5 times
   function setMetadataWithRetry(muxPlayer, title, retries) {
   let attempt = 0;
 
