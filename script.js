@@ -117,7 +117,7 @@ async function initializeVideoCarousel(config) {
 
     try {
       // Set the metadata title
-      muxPlayer.setAttribute('metadata-video-title', title || 'Untitled Video');
+      muxPlayer.setAttribute('metadata-video-title', item.title || 'Untitled Video');
       // Check if the title was set correctly
       if (muxPlayer.getAttribute('metadata-video-title') === title) {
         console.log('Successfully set metadata-video-title:', title);
