@@ -92,7 +92,7 @@
       <mux-player
         class="fullscreen-video"
         playback-id=""
-        metadata-video-title=""
+      
         metadata-viewer-user-id="user"
         accent-color="${window.MyVideoCarouselConfig.playButtonColor}"
       ></mux-player>
